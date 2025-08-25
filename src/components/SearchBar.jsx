@@ -11,7 +11,7 @@ const SearchBar = ({search, setSearch, handleSearch}) => {
       className='flex-1 border-none outline-none pl-3 bg-slate-100 text-[13px] text-black placeholder:text-black'
       />
 
-      <button onClick={handleSearch}  className='bg-white text-black w-[110px] h-[100] cursor-pointer text-[13px] ' >
+      <button onClick={handleSearch}  className='bg-white text-black w-[110px] h-full cursor-pointer text-[13px] ' >
         Search City
       </button>
       
