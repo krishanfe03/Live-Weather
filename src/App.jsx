@@ -21,13 +21,20 @@ const App = () => {
       const data = await response.json();
 
       console.log(data);
-      if (data) {
+      if (data.cod === 200) {
         setWeatherData(data);
-        setLoading(false);
+        //setLoading(false);
+      }
+      else {
+        setWeatherData(null);
+        console.log("Weather API Error:", data.message)
       }
     } catch (e) {
-      setLoading(false);
-      console.log(e.message);
+      setWeatherData(null);
+      console.log("Network Error:", e.message);
+    }
+    finally {
+    setLoading(false);
     }
   }
 
@@ -49,11 +56,19 @@ const App = () => {
       const response = await fetch(url);     
       const data = await response.json();
       console.log(data)
-      setForecastData(data);
+      
+      if(data.cod === "200") {
+        setForecastData(data)
+      }
+      else {
+        setForecastData(null)
+        console.log("ForeCast API Error:", data.message)
+      }
+
     } 
     catch (error) {
-      console.log(error)
-      
+    setForecastData(null);
+    console.log("Forecast Network Error:", error.message);      
     }
   }
 
