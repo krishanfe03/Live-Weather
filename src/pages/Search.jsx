@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SearchBar from '../components/SearchBar'
 import Weather from '../components/Weather'
 
-const Search = ({ search, setSearch, weatherData, loading, fetchWeatherData, handleSearch, fetchForecast, forecastData, filterforecast }) => {
+const Search = ({ search, setSearch, weatherData, loading, fetchWeatherData, fetchForecast, forecastData, filterforecast }) => {
 
   async function handleSearch() {
     fetchWeatherData(search);
@@ -42,8 +42,8 @@ const Search = ({ search, setSearch, weatherData, loading, fetchWeatherData, han
                   <p className="text-[19px] text-emerald-400 mb-1" >Weather</p>
                 </div>
 
-                {filterforecast(forecastData).map((day)=> {
-                  return <div className="flex justify-between space-y-1">
+                {filterforecast(forecastData).map((day, index)=> {
+                  return <div className="flex justify-between mb-1" key={index}>
                     <p className="w-1/4" >{day.dt_txt.split(" ")[0]}</p>
                     <p className="w-1/3 text-center">{day.main.temp} °C</p>
                     <p className="w-1/3 text-right">{day.weather[0].description}</p>

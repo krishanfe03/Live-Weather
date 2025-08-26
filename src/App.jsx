@@ -75,8 +75,6 @@ const App = () => {
     return filterdate;
   }
 
-  filterforecast(forecastData)
-
   return (
     <div className="app">
       <nav className="max-w-[300px] mx-auto p-10 flex justify-between" >
@@ -84,6 +82,13 @@ const App = () => {
         <Link to='/search' className="bg-emerald-200 px-5 py-1 rounded-[2px] text-black" >Search</Link>
       </nav>
       <Routes>
+
+        <Route 
+          path="*"
+          element={<h1 className="text-center text-red-500">Page Not Found</h1>}
+        />
+
+
         <Route
           path="/"
           element={

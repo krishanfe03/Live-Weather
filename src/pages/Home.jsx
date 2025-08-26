@@ -36,13 +36,20 @@ const Home = ({  weatherData, fetchWeatherData, fetchForecast, forecastData, fil
   // get the lat lon if the browser is allow
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
 
         fetchCurrentLocation(lat, lon);
         fetchForecast(null, lat, lon);  // passing the null because here we not use the city name we use the coordinates lat and lon
-      });
+      }, 
+      (error) => {
+        console.log("Geolocation denied", error);
+        fetchWeatherData("jaipur");
+        fetchForecast("jaipur");
+      }
+    );
     } else {
       fetchWeatherData("jaipur");
       fetchForecast("jaipur");
@@ -76,8 +83,8 @@ const Home = ({  weatherData, fetchWeatherData, fetchForecast, forecastData, fil
                   <p className="text-[19px] text-emerald-400 mb-1" >Weather</p>
                 </div>
 
-                {filterforecast(forecastData).map((day, idx)=> {
-                  return <div className="flex justify-between space-y-1">
+                {filterforecast(forecastData).map((day, index)=> {
+                  return <div className="flex justify-between space-y-1" key={index}>
                     <p className="w-1/4" >{day.dt_txt.split(" ")[0]}</p>
                     <p className="w-1/3 text-center">{day.main.temp} °C</p>
                     <p className="w-1/3 text-right">{day.weather[0].description}</p>
